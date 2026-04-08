@@ -36,7 +36,7 @@ class Product(ABC):
     pass
   
   def __str__(self):
-    pass
+    return f'Product named {self.__name}, id {self.__id}, made by {self.creator}, costs {self.price}'
   
   @property
   def price(self):
@@ -45,15 +45,15 @@ class Product(ABC):
   def price(self, value):
     if value <= 0:
       raise WrongPrice("Price inputted is invalid")
-    pass
+    self._price = value
   
   @property
   def id(self):
-    return self.id
+    return self.__id
   
   @property
   def name(self):
-    return self.name
+    return self.__name
 
 class Electronics(Product):
   def __init__(self, id, ProductName, creator, price, warranty, voltage, power):
@@ -63,7 +63,7 @@ class Electronics(Product):
     self.power = power
   
   def Product_info(self):
-    return f'This electronic has a voltage at ${self.voltage}, uses ${self.power} power, warranty until ${self.warranty}'
+    return f'This electronic has a voltage at {self.voltage}, uses {self.power} power, warranty until {self.warranty}'
   
   def Product_type(self):
     return 'Electronics'
@@ -74,7 +74,7 @@ class Ceramics(Product):
     self.material = material
   
   def Product_info(self):
-    return f'This piece of ceramic is made out of ${self.material}.'
+    return f'This piece of ceramic is made out of {self.material}.'
   
   def Product_type(self):
     return 'Ceramics'
@@ -86,10 +86,10 @@ class Perishables(Product):
     self.dateExpired = dateExpired
   
   def Product_info(self):
-    return  f'This perishable was made on ${self.dateMade}, expires on ${self.dateExpired}.'
+    return  f'This perishable was made on {self.dateMade}, expires on {self.dateExpired}.'
   
   def Product_type(self):
     return 'Perishables'
   
-a = Electronics(1, 2, 3, 4)
-print(a)
+a = Electronics(1, 2, 3, 4, 1, 2, 3)
+print(a.Product_info())
